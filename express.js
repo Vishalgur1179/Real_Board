@@ -1,19 +1,15 @@
+// server side
 const express = require("express");
-const path = require("path");
-const http = require("http");
-const socketIO = require("socket.io");
-
-// Create an express server
+// express server
 const app = express();
-// Create an HTTP server
-const server = http.Server(app);
-// Attach socket.io to the server
-const io = socketIO(server);
-
-// Serve static assets from the 'public' directory
+//  nodejs
+const server = require("http").Server(app);
+// nodejs => socket enabled
+const path = require("path");
+const io = require("socket.io")(server);
+// serve static assets to client
 app.use(express.static("public"));
-
-// Handle socket connections
+// server
 io.on("connection", function(socket) {
   socket.on("size", function(size) {
     socket.broadcast.emit("onsize", size);
@@ -21,6 +17,7 @@ io.on("connection", function(socket) {
   socket.on("color", function(color) {
     socket.broadcast.emit("oncolor", color);
   });
+
   socket.on("toolchange", function(tool) {
     socket.broadcast.emit("ontoolchange", tool);
   });
@@ -40,9 +37,8 @@ io.on("connection", function(socket) {
     socket.broadcast.emit("onredo");
   });
 });
-
-// Set the port from the environment variable, default to 3000
+// nodejs server
 const port = process.env.PORT || 3000;
-server.listen(port, function() {
-  console.log(`Server has started at port ${port}`);
+server.listen(port, function(req, res) {
+  console.log("Server has started at port 3000");
 });
