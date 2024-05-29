@@ -9,6 +9,7 @@ const path = require("path");
 const io = require("socket.io")(server);
 // serve static assets to client
 app.use(express.static("public"));
+
 // server
 io.on("connection", function(socket) {
   socket.on("size", function(size) {
@@ -25,7 +26,8 @@ io.on("connection", function(socket) {
     socket.broadcast.emit("onhamburger");
   });
   socket.on("mousedown", function(point) {
-    socket.broadcast.emit("onmousedown", point);
+    socket.broadcast.emit("onmousedown", 
+    point);
   });
   socket.on("mousemove", function(point) {
     socket.broadcast.emit("onmousemove", point);
