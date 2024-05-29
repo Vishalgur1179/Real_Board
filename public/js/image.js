@@ -28,4 +28,3 @@ a.href=board.toDataURL("image/png");
 a.click();
 a.remove()
 });
-
