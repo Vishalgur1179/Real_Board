@@ -115,7 +115,7 @@ function handleToolChange(tool) {
       eraserOptions.classList.add("show");
     } else {
       Activetool = "eraser";
-      console.log(tool[1].classList);
+      // console.log(tool[1].classList);
       tools[0].classList.remove("active");
       tools[1].classList.add("active");
       pencilOptions.classList.remove("show");
